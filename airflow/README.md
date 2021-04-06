@@ -64,8 +64,8 @@ The DAG is configured by giving it some default_args which specify the start_dat
 
 
 ### How to run this project?
-Step 1: Create AWS Redshift Cluster using either the console or through the notebook provided in create-redshift-cluster
-Step 2: Start Apache Airflow
+-- Step 1: Create AWS Redshift Cluster using either the console or through the notebook provided in create-redshift-cluster
+-- Step 2: Start Apache Airflow
 Step 3: Configure Apache Airflow Hooks
   * On the left is the S3 connection. The Login and password are the IAM user's access key and secret key that you created. Basically, by using these credentials, we are able to read data from S3.
   * On the right is the redshift connection. These values can be easily gathered from your Redshift cluster
