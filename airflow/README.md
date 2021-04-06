@@ -75,7 +75,8 @@ The DAG is configured by giving it some default_args which specify the start_dat
      * This dag will create the staging, fact and dimension tables. 
           * The reason we need to trigger this manually is because, we want to keep this out of main dag.
           * Normally, creation of tables can be handled by just triggering a script. But for the sake of illustration, a DAG is created for this and had Airflow trigger the DAG. You can turn off the DAG once it is completed. After running this DAG, you should see all the tables created in the AWS Redshift.
-     * As the execution start date is 2018-11-1 with a schedule interval @daily and the execution end date is 2018-11-30, Airflow will automatically trigger and schedule the dag runs once per day for 30 times. Shown below are the 30 DAG runs ranging from start_date till end_date, that are trigged by airflow once per day.
+     * As the execution start date is 2018-11-1 with a schedule interval @daily and the execution end date is 2018-11-30, Airflow will automatically trigger and schedule the dag runs once per day for 30 times. 
 
 
+----
 Credits: Udacity & Various Github Profiles
