@@ -79,4 +79,4 @@ Saved to S3 are fact and dimensional tables in a star schema optimized for queri
 Files are stored in the Apache Parquet format for high performance data IO.
 
 This includes the following tables.
-![fact_dim_table](Slide1.JPG)
+![fact_dim_table](Slide1.jfif)
