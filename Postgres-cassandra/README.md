@@ -72,3 +72,8 @@ for index, row in df.iterrows():
     #songplay_data = 
     cur.execute(songplay_table_insert, songplay_data)      
 ```
+
+
+
+#### Credits
+This project was built from a Udacity Nanodegree template.
