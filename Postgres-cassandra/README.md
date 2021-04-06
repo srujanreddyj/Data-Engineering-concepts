@@ -8,7 +8,7 @@ Database Design
 ----
 To build this database, I select a star scheme, as it simplifies generating queries and perform fast aggregations. The fact and dimension tables are built as follows:
 
-![Fact Table - Dimension Table](Slide1.JPG)
+![Fact Table - Dimension Table](Slide1.jfif)
 
 The fact table and dimensions table are described as above.
 
