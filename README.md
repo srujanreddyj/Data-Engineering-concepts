@@ -18,5 +18,5 @@
    * Built a data lake on AWS Cloud using Spark and AWS EMR CLuster. 
    * The Data lake acts as a single source analytics palform and an ETL jobs are written in Spark that loads data from S3, processes the data into analytics tables, and loads them back into S3.
 4. [Data Pipelines with Airflow](https://github.com/srujanreddyj/data-engineering-concepts/tree/master/airflow)
-   * Created and automated a set of data pipelines with Airflow, monitoring and debugging production pipelines. I scheduled ETL jobs in Airflow, create project related  plugins, operators and automate the pipeline execution.
+   * Created and automated a set of data pipelines with Airflow, monitoring and debugging production pipelines. I scheduled ETL jobs in Airflow, created project related  plugins, operators and automated the pipeline execution.
 
