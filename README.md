@@ -7,7 +7,7 @@
 * Batch ETL: Python, SparkSQL
 * Workflow Management: Airflow
 
-### Collection of Data Engineering projects/Concepts Learnt
+### Data Engineering projects/Concepts Learnt
 1. Data Modeling
   * Created a relational and NoSQL data models to fit the diverse needs of data consumers. 
   * Used ETL to build databases in PostgreSQL and Apache Cassandra.
