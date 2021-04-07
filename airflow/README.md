@@ -39,10 +39,21 @@ By default, airflow comes with some simple built-in operators like ```PythonOper
 The description of each of these operators follows:
 
 * ```StageToRedshiftOperator```: Stages data to a specific redshift cluster from a specified S3 location. Operator uses templated fields to handle partitioned S3 locations.
-* ```LoadFactOperator```: Loads data to the given fact table by running the provided sql statement. Supports delete-insert and append style loads.
-* ```LoadDimensionOperator```: Loads data to the given dimension table by running the provided sql statement. Supports delete-insert and append style loads.
+     * The stage operator is expected to load any JSON and CSV formatted files from S3 to Amazon Redshift. 
+     * The operator creates and runs a SQL COPY statement based on the parameters provided.
+     * The operator's parameters are where in S3 the file is loaded and what is the target table.
+     * The parameters should be used to distinguish between JSON and CSV file. 
+     * Another important requirement of the stage operator is containing a templated field that allows it to load timestamped files from S3 based on the execution time and run backfills.
+* ```LoadFactOperator```: Loads data to the given fact table by running the provided sql statement. Supports delete-insert and append style loads. ```LoadDimensionOperator```: Loads data to the given dimension table by running the provided sql statement. Supports delete-insert and append style loads.
+     * Provided SQL Helper class will help to run data transformations. 
+     * Most of the logic is within the SQL transformations and the operator is expected to take as input a SQL statement and target database on which to run the query against. 
+     * Dimension loads are often done with the truncate-insert pattern where the target table is emptied before the load. 
+     * Fact tables are usually massive that they should only allow append type functionality. 
 * ```HasRowsOperator```: Data quality check to ensure that the specified table has rows.
 * ```DataQualityOperator```: Performs data quality checks by running sql statements to validate the data.
+     * This operator creates the data quality operator, which is used to run checks on the data itself. 
+     * The operator's main functionality is to receive one or more SQL based test cases along with the expected results and execute the tests. 
+     * For each the test, the test result and expected result needs to be checked and if there is no match, the operator should raise an exception and the task should retry and fail eventually.
 
 
 ``` Code for each of these operators is located in the plugins/operators directory. ```
@@ -53,7 +64,7 @@ Pipeline Schedule and Data Partitioning: The events data residing on S3 is parti
 The DAG is configured by giving it some default_args which specify the start_date, end_date and other design choices which I have mentioned above.
 
 ```
-     'owner': 'srujan',
+    'owner': 'srujan',
     'start_date': datetime(2018, 1, 11),
     'depends_on_past': False,
     'retries': 3,
