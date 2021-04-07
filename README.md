@@ -8,7 +8,7 @@
 * Workflow Management: Airflow
 
 ### Data Engineering projects/Concepts Learnt
-1. [Data Modeling](https://github.com/srujanreddyj/data-engineering-concepts/tree/master/Postgres-cassandra)
+1. ### [Data Modeling](https://github.com/srujanreddyj/data-engineering-concepts/tree/master/Postgres-cassandra)
    * Created a relational database using PostgreSQL to fit the diverse needs of data consumers.
    * Developed a Star Schema database using optimized definitions of Fact and Dimension tables. Normalization of tables.
    * Created a nosql database using Apache Cassandra 
