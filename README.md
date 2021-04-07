@@ -14,7 +14,7 @@
    * Created a nosql database using Apache Cassandra 
    * Developed denormalized tables optimized for a specific set queries and business needs
    * Used ETL to build databases in PostgreSQL and Apache Cassandra.
-   * Proficiencies include: Python, PostgreSql, Star Schema, ETL pipelines, Normalization, Apache Cassandra, Denormalization
+   * ***Proficiencies include: Python, PostgreSql, Star Schema, ETL pipelines, Normalization, Apache Cassandra, Denormalization***
 2. [Data Warehouses](https://github.com/srujanreddyj/data-engineering-concepts/tree/master/datawarehouse)
    * Applied Data Warehouse architectures learnt and built a data warehouse on AWS cloud. 
    * ETL pipeline that extracts data from **S3**, stages them in **Redshift**, transforms the data into **dimension and fact tables** for analytics teams.
