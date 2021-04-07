@@ -9,9 +9,9 @@
 
 ### Data Engineering projects/Concepts Learnt
 1. #### [Data Modeling](https://github.com/srujanreddyj/data-engineering-concepts/tree/master/Postgres-cassandra)
-   * Created a relational database using PostgreSQL to fit the diverse needs of data consumers.
+   * Created a relational database using PostgreSQL to find the diverse needs of data consumers.
    * Developed a Star Schema database using optimized definitions of Fact and Dimension tables. Normalization of tables.
-   * Created a nosql database using Apache Cassandra 
+   * Created a nosql database using Apache Cassandra based on the schema outlined above. 
    * Developed denormalized tables optimized for both specific set queries and business queries
    * An ETL pipeline was build databases in PostgreSQL and Apache Cassandra.
    * ***Proficiencies learned and used: Python, PostgreSql, Star Schema, ETL pipelines, Normalization, Apache Cassandra, Denormalization***
