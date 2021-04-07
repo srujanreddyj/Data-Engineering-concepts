@@ -74,7 +74,23 @@ for index, row in df.iterrows():
 ```
 
 
+----
+## Modelling NoSQL Database or Apache Cassandra Database:
+In this project, I would be applying Data Modeling with Apache Cassandra and complete an ETL pipeline using Python. I am provided with a part of the ETL pipeline that transfers data from a set of CSV files within a directory to create a streamlined CSV file to model and insert data into Apache Cassandra tables.
 
+#### Modelling your NoSQL Database or Apache Cassandra Database:
+1. Design tables to answer the queries outlined
+2. Write Apache Cassandra CREATE KEYSPACE and SET KEYSPACE statements
+3. Develop CREATE statement for each of the tables to address each question
+4. Load the data with INSERT statement for each of the tables
+5. Include IF NOT EXISTS clauses in your CREATE statements to create tables only if the tables do not already exist. Include DROP TABLE statement for each table, this way we can run drop and create tables whenever you want to reset your database and test your ETL pipeline
+6. Test by running the proper SELECT statements with the correct WHERE clause
+
+#### Build ETL Pipeline:
+1. Implement the logic in the notebook template to iterate through each event file in event_data to process and create a new CSV file in Python
+2. Make necessary edits to Part II of the notebook template to include Apache Cassandra CREATE and INSERT three statements to load processed records into relevant tables in your data model
+3. Test by running SELECT statements after running the queries on your database
+4. Drop the tables and shutdown the cluster
 
 
 #### Credits
