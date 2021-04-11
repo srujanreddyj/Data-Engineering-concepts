@@ -13,13 +13,13 @@ To build this database, I select a star scheme, as it simplifies generating quer
 The fact table and dimensions table are described as above.
 
 Fact Table:
-    *  songplays: The songplay_id field is the primary key and it is an auto-incremental value.
+   * songplays: The songplay_id field is the primary key and it is an auto-incremental value.
     
 Dimensions Tables:
-    * users - users in the app : user_id is the primary key 
-    * songs - songs in music database: song_id is the primary key
-    * artists - artists in music database: artist_id is the primary key
-    * time - timestamps of records in songplays broken down into specific units: start_time is the primary key
+   * users - users in the app : user_id is the primary key 
+   * songs - songs in music database: song_id is the primary key
+   * artists - artists in music database: artist_id is the primary key
+   * time - timestamps of records in songplays broken down into specific units: start_time is the primary key
     
 ------------------------
 Building the database and the ETL Pipeline:
