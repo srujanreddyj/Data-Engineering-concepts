@@ -43,35 +43,35 @@ Sample Code:
                                                             gender char(1), level varchar)""")
     ~~~
 3. Inserting values into the table 
-~~~ python
-user_table_insert = ("""
-INSERT INTO users (user_id, first_name, last_name, gender, level)
-          VALUES(%s, %s, %s, %s, %s)
-          ON CONFLICT(user_id) DO UPDATE
-                     SET level = EXCLUDED.level;
-""")
-~~~ 
+  ~~~ python
+  user_table_insert = ("""
+  INSERT INTO users (user_id, first_name, last_name, gender, level)
+            VALUES(%s, %s, %s, %s, %s)
+            ON CONFLICT(user_id) DO UPDATE
+                       SET level = EXCLUDED.level;
+  """)
+  ~~~ 
             
 4. Developing a list of actions for all the tables creating and droping
 5. Inserting the dataset records into tables
-```python
-# insert songplay records
-for index, row in df.iterrows():
+  ```python
+  # insert songplay records
+  for index, row in df.iterrows():
 
-    # get songid and artistid from song and artist tables
-    cur.execute(song_select, (row.song, row.artist, row.length))
-    results = cur.fetchone()
+      # get songid and artistid from song and artist tables
+      cur.execute(song_select, (row.song, row.artist, row.length))
+      results = cur.fetchone()
 
-    if results:
-        songid, artistid = results
-    else:
-        songid, artistid = None, None
+      if results:
+          songid, artistid = results
+      else:
+          songid, artistid = None, None
 
-    # insert songplay record
-    songplay_data = (index, pd.to_datetime(row.ts, unit="ms"), row.userId, row.level, songid, artistid, row.itemInSession, row.location, row.userAgent)
-    #songplay_data = 
-    cur.execute(songplay_table_insert, songplay_data)      
-```
+      # insert songplay record
+      songplay_data = (index, pd.to_datetime(row.ts, unit="ms"), row.userId, row.level, songid, artistid, row.itemInSession, row.location, row.userAgent)
+      #songplay_data = 
+      cur.execute(songplay_table_insert, songplay_data)      
+  ```
 
 
 ----
