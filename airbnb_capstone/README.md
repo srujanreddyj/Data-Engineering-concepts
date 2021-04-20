@@ -21,7 +21,8 @@ The data comes in three files namely REVIEWS, LISTINGS, CALENDAR.
 ## Exploring and Assessing the Data
 First step is to explore the data to identify the data quality issues like null values, duplicate data etc.
  * ```Calendar``` and  ```Reviews``` datasets are of good quality, but contains some null column values. If the listing_id and host_id are null, the rows are dropped from the table.
-* ```Listing``` dataset is which contains a lot columns. Making sense from all the columns would take time. In our case we going to use only subset of columns related to the goal of this project. Again this dataset contains many null values. Some columns with null values have been dropped completely. After dropping the null columns, we will be uploading the full dataset into data lake so as to have the ability to use thew other columns that we weren't able to use in this project.
+* ```Listing``` dataset is which contains a lot columns. 
+  * Making sense from all the columns would take time. In our case we going to use only subset of columns related to the goal of this project. Again this dataset contains many null values. Some columns with null values have been dropped completely. After dropping the null columns, we will be uploading the full dataset into data lake so as to have the ability to use thew other columns that we weren't able to use in this project.
 
 #### Decision Taken regarding Tools, technologies, and data model:
 The tools used in this projects are notebooks, Apache Spark, Amazon S3, Amazon Redshift, Apache Airflow.
