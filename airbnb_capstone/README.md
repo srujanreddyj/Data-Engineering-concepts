@@ -20,15 +20,16 @@ The data comes in three files namely REVIEWS, LISTINGS, CALENDAR.
 
 ## Exploring and Assessing the Data
 First step is to explore the data to identify the data quality issues like null values, duplicate data etc.
- * ```Calendar``` and  ```Reviews``` datasets are of good quality, but contains some null column values. If the listing_id and host_id are null, the rows are dropped from the table.
-* ```Listing``` dataset is which contains a lot columns. 
-  * Making sense from all the columns would take time. In our case we going to use only subset of columns related to the goal of this project. 
-  * Again this dataset contains many null values. Some columns with null values have been dropped completely. 
-  * After dropping the null columns, we will be uploading the full dataset into data lake so as to have the ability to use thew other columns that we weren't able to use in this project.
+ * ```Calendar``` and  ```Reviews``` datasets are of good quality, but contains some null column values. 
+   * If the listing_id and host_id have null column values, then the respective rows are dropped from the table.
+* ```Listing``` dataset is which contains a lot of columns. 
+  * Making sense from all the columns would take time. In our case we are going to use a subset of columns related to the goal of this project. 
+  * Again this dataset contains many null values. Columns values with null in listing_id, host_id have been dropped. 
+  * After dropping the null columns & rows, we will be uploading the full dataset into data lake so as to have the ability to use thew other columns that we weren't able to use in this project.
 
-#### Decision Taken regarding Tools, technologies, and data model:
+#### Tools and Technologies:
 The tools used in this projects are notebooks, Apache Spark, Amazon S3, Amazon Redshift, Apache Airflow.
-* To explore the dataset, I started with Google Colab free computing resources with Apache Spark. 
+* To explore the dataset, I started with Google Colab free computing resources and Apache Spark. 
   * Spark is better in handling huge data records. Spark provides a great performace as it stores data in-memory shared across the cluster.
 * The data lake is stored on Amazon S3, an object storgae service that offers scalability, data availability, security and performance. 
   * S3 is perfect for storing data partitioned and grouped in files for low cost and with a lot of flexibility.
@@ -38,7 +39,7 @@ The tools used in this projects are notebooks, Apache Spark, Amazon S3, Amazon R
 * To orchestarte the overall data pipeline, I used Apache Airflow as it provides an intutitive UI helping us to track the progress of our pipelines.
 
 
-## Define the Data Model
+## Defining the Data Model
 The final data model includes 4 dimension tables and 1 Fact table.
 This data model will facilitate the daily reporting tasks for the teams reagrding who are the hosts, what are the properties listed, what are the most reviews, reviewers, which neighbourhood and help in building recommendations to the users and improve the services. 
 
@@ -64,7 +65,10 @@ The design of the pipeline can be summarized as:
 * Load a cleaned dataset and intermediate artifacts to S3 destination locations.
 * Build dimension tables and fact table by calculating summary statistics/measures using EMR Cluster, SQL and Airflow operators.
 
+***DATA DICTIONARY***
+
 ![image](https://user-images.githubusercontent.com/48939255/115416339-501e8380-a1bd-11eb-998e-46c867168941.png)
+
 This DAG is responsible for the ETL Process and creating a datalake.
 
 ![image](https://user-images.githubusercontent.com/48939255/115415290-65df7900-a1bc-11eb-8928-d8b61838ca32.png)
@@ -84,7 +88,7 @@ The ideas behind the datalakes is that they provide us with the flexibility in t
   *  For Data Processing, I used SQL to process data from S3 bucket. For each task, an SQL statement has been providded in ```SQLQUEIRES.py``` which does the data ingestion process smoothly.
   *  This data processing file contains all the queries to create tables, inserting data from stagging tables and building query tables.
 
-***Tree graph of ETL Pipeline***
+***Tree graph of ETL Pipeline:***
 
 ![image](https://user-images.githubusercontent.com/48939255/115348036-bd0f2a80-a177-11eb-886a-dfe325445bd4.png)
 
@@ -94,7 +98,7 @@ The ideas behind the datalakes is that they provide us with the flexibility in t
 ![image](https://user-images.githubusercontent.com/48939255/115416376-5a408200-a1bd-11eb-92a0-5c907ab13bf4.png)
 
 ### Running the Project
-1. Explore the dataset as mentioned in above notebook file
+1. Explore the dataset as mentioned in above notebook file, transform the data and store the processed result in S3.
 2. Create AWS Redshift Cluster using either the console or through the notebook provided in create-redshift-cluster
 3. Ensure the airflow instance is up and running.
 4. Ensure all the content of dags and plugins are present in the Airflow work environment as needed.
@@ -115,5 +119,5 @@ The ideas behind the datalakes is that they provide us with the flexibility in t
   * This scenario can be dealt easily as we are using Apache Airflow. The teams can easily set the Airflow pipelines to a schedule interval to be daily at 7 am on.
   * Regualar email updates on failures and quality can also be enabled.
 * ****The database needed to be accessed by 100+ people.****
-  * Amazon web services are known for its stability and scalability features. So, a concurrency limit for the Redshift cluster be set.
+  * Amazon web services are known for its stability and scalability features. So, a concurrency limit for the Redshift cluster can be set and also be expanded as deemed necessary.
   * Also AWS comes with auto-scaling capabilities and good read performance and hence would not be considered as an issue and needed major changes in the platform to be done properly.
