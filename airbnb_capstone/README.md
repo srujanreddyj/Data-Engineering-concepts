@@ -22,17 +22,20 @@ The data comes in three files namely REVIEWS, LISTINGS, CALENDAR.
 First step is to explore the data to identify the data quality issues like null values, duplicate data etc.
  * ```Calendar``` and  ```Reviews``` datasets are of good quality, but contains some null column values. If the listing_id and host_id are null, the rows are dropped from the table.
 * ```Listing``` dataset is which contains a lot columns. 
-  * Making sense from all the columns would take time. In our case we going to use only subset of columns related to the goal of this project. Again this dataset contains many null values. Some columns with null values have been dropped completely. After dropping the null columns, we will be uploading the full dataset into data lake so as to have the ability to use thew other columns that we weren't able to use in this project.
+  * Making sense from all the columns would take time. In our case we going to use only subset of columns related to the goal of this project. 
+  * Again this dataset contains many null values. Some columns with null values have been dropped completely. 
+  * After dropping the null columns, we will be uploading the full dataset into data lake so as to have the ability to use thew other columns that we weren't able to use in this project.
 
 #### Decision Taken regarding Tools, technologies, and data model:
 The tools used in this projects are notebooks, Apache Spark, Amazon S3, Amazon Redshift, Apache Airflow.
-* To explore the dataset, I started with Google Colab free computing resources with Apache Spark. Spark is better in handling huge data records. Spark provides a great performace as it stores data in-memory shared across the cluster.
+* To explore the dataset, I started with Google Colab free computing resources with Apache Spark. 
+  * Spark is better in handling huge data records. Spark provides a great performace as it stores data in-memory shared across the cluster.
 * The data lake is stored on Amazon S3, an object storgae service that offers scalability, data availability, security and performance. 
   * S3 is perfect for storing data partitioned and grouped in files for low cost and with a lot of flexibility.
   * Also it has the flexibility in adding and removing additional data
   * Ease of schema design and avaialbility to a wide range of users
-* For ETL process, I used an EMR Cluster on AWS.
-* To orchestarte the overall data pipeline, I used Apache Airflow as it provides and intutitive UI helping us to track the progress of our pipelines.
+* For ETL process, I used an EMR Cluster on AWS Redshift.
+* To orchestarte the overall data pipeline, I used Apache Airflow as it provides an intutitive UI helping us to track the progress of our pipelines.
 
 
 ## Define the Data Model
@@ -81,10 +84,13 @@ The ideas behind the datalakes is that they provide us with the flexibility in t
   *  For Data Processing, I used SQL to process data from S3 bucket. For each task, an SQL statement has been providded in ```SQLQUEIRES.py``` which does the data ingestion process smoothly.
   *  This data processing file contains all the queries to create tables, inserting data from stagging tables and building query tables.
 
-Below is the tree graph of ETL Pipeline
+***Tree graph of ETL Pipeline***
+
 ![image](https://user-images.githubusercontent.com/48939255/115348036-bd0f2a80-a177-11eb-886a-dfe325445bd4.png)
 
-Below is the image of time taken for ETL pipeline to complete.
+
+***Time Taken for ETL pipeline to complete:***
+
 ![image](https://user-images.githubusercontent.com/48939255/115416376-5a408200-a1bd-11eb-92a0-5c907ab13bf4.png)
 
 ### Running the Project
