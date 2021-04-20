@@ -8,7 +8,7 @@ Airbnb wants to analyze the historical data of all the listings on its platform 
 
 ## Data Description and Sources
 
-The data has been scoped from an awesome site (inside-airbnb)[http://insideairbnb.com/get-the-data.html] which contains the Airbnb actual data. This dataset contains the information about various aspects of Reviews, Calendar, Listings of many cities. As I was interested in Austin and LA, I took the respective data and tried to extract a meaningful information. 
+The data has been scoped from an awesome site [inside-airbnb](http://insideairbnb.com/get-the-data.html) which contains the Airbnb actual data. This dataset contains the information about various aspects of Reviews, Calendar, Listings of many cities. As I was interested in Austin and LA, I took the respective data and tried to extract a meaningful information. 
 The data comes in three files namely REVIEWS, LISTINGS, CALENDAR.
 * Reviews File contains all the reviews of the listing on Airbnb website
   * This file contains more than 1,000,000 rows/records.
