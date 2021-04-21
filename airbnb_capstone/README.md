@@ -99,29 +99,28 @@ The idea behind using the datalakes is that they provide us with the flexibility
 ***AIRFLOW OPERATORS in the Pipeline:***
 ![image](https://user-images.githubusercontent.com/48939255/115416339-501e8380-a1bd-11eb-998e-46c867168941.png)
 
-***COMPLETE DATA PIPELINE DESIGN in AIRFLOW*** 
+***COMPLETE DATA PIPELINE DESIGN in AIRFLOW***
+
 This DAG is responsible for the ETL Process and creating a datalake.
 
 ![image](https://user-images.githubusercontent.com/48939255/115415290-65df7900-a1bc-11eb-8928-d8b61838ca32.png)
 
-***Tree graph of ETL Pipeline:***
+***TREE GRAPH of ETL Pipeline:***
 
 ![image](https://user-images.githubusercontent.com/48939255/115348036-bd0f2a80-a177-11eb-886a-dfe325445bd4.png)
 
 
-***Time Taken for ETL pipeline to complete:***
+***KANBAN of ETL pipeline to complete:***
 
 ![image](https://user-images.githubusercontent.com/48939255/115416376-5a408200-a1bd-11eb-92a0-5c907ab13bf4.png)
 
 ### Running the Project
 1. Explore the dataset as mentioned in above notebook file, transform the data and store the processed result in S3.
-2. Create AWS Redshift Cluster using either the console or through the notebook provided in create-redshift-cluster
+2. Create AWS Redshift Cluster using either the console or through the CLI.
 3. Ensure the airflow instance is up and running.
 4. Ensure all the content of dags and plugins are present in the Airflow work environment as needed.
 5. Create AWS Connection and Postgres Redshift Connection Ids by providing AWS Access KEY ID, Secret Access Key, Cluster Name URL, Database Name, User and Password, Post Number
 6. Actiavte DAG and run it.
-
-
 
 
 
@@ -136,4 +135,13 @@ This DAG is responsible for the ETL Process and creating a datalake.
   * Regualar email updates on failures and quality can also be enabled.
 * ****The database needed to be accessed by 100+ people.****
   * Amazon web services are known for its stability and scalability features. So, a concurrency limit for the Redshift cluster can be set and also be expanded as deemed necessary.
-  * Also AWS comes with auto-scaling capabilities and good read performance and hence would not be considered as an issue and needed major changes in the platform to be done properly.
+  * Also AWS comes with auto-scaling capabilities and good read performance and hence would not be considered as an issue and needed major changes in the platform can be done properly.
+
+
+
+## LESSONS LEARNED:
+1. Using Parquet data files is much faster and AWS ability to read these files is superior compared csv when text column values are present. csv files are larger in space compared to parquet files.
+2. Null Fields will not be present in parquet and thereby mismatch of columns arise in AWS Redshift.
+3. Redshift COPY Command: COPY, INSERT commands in redshift work seemless when the data type of the columns match or else understanding the error message is even more painful
+4. Install AIRFLOW on local machines is not as easy as it sounds.
+5. Apache Spark SQL and Pyspark solve purpose when there are more **1 million rows**, else better to stick with Python only.
