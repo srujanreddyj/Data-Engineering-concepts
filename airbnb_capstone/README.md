@@ -56,13 +56,13 @@ After reviewing and cleaning the datasets, we are required to build three stagin
 ***DATA DICTIONARY***
 
 The Data Warehouse tables are the Fact and Dimension Tables:
- The 4 Dimension Tables:
+* The 4 Dimension Tables:
   * ```DIM_HOSTS```: All the essential information of the hosts with their listing IDs
   * ```DIM_PROPERTIES```: All the information about each property and its attributes
   * ```DIM_CALENDARS```: Information about the property listing of its availbility, adjusted price, etc
   * ```DIM_REVIEWS```: Information about reviews submitted by users for every listing they stayed including the information like reviewer name and date of the review 
-
-  -- The Fact Table ```Airbnb_facts_Austin_LA``` contains the important measures like number of reviews, average review ratings and potential earnings along with the information about the corresponding property listing id, host_id, neighbourhood and . 
+* The Fact Table
+  * ```Airbnb_facts_Austin_LA``` contains the important measures like number of reviews, average review ratings and potential earnings along with the information about the corresponding property listing id, host_id, neighbourhood and . 
 
 ![Schema-based Data Model](https://user-images.githubusercontent.com/48939255/115430537-1011cd80-a1ca-11eb-9ecf-91d31e1673bc.png)
 
