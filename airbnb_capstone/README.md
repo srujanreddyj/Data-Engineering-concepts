@@ -1,10 +1,15 @@
-Project:
+# DATA ENGINEERING CAPSTONE PROJECT
+
+## Project
 ---
 Developing a data pipeline that creates an analytical database  for querying information about the reviews and ratings hosted on redshift database. The main goal of this project is to build an end to end data pipeline which is capable of big volumes of data.
 
 ## Scope of the Project
 Airbnb wants to analyze the historical data of all the listings on its platform since its initial stages and improve the their recommendations to their customers. To do this, they need to gather average rating, number of ratings and prices of the airbnb listings over the years. As a data engineer of the company, I took up the task of building an ETL pipeline that extracts the releveant data like listings, properties, hosts details and load it to data warehouse that makes querying for the decision makers and analysts easier. 
 
+#### END USE CASES:
+* Query based analytical tables that can be used by decision makers
+* Analytical Table that can be used by analysts to explore more and develop recommendations for users.
 
 ## Data Description and Sources
 
