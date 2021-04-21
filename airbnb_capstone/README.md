@@ -141,9 +141,8 @@ This DAG is responsible for the ETL Process and creating a datalake.
 1. Using Parquet data files is much faster and AWS's ability to read these files is superior compared to CSV when text column values are present. CSV files are larger in space compared to parquet files.
 2. Null Fields will not be present in parquet and thereby mismatch of columns arise in AWS Redshift.
 3. Redshift COPY Command: COPY, INSERT commands in redshift work seamless when the data type of the columns match or else debugging and understanding the error message will take time forever.
-4. Install AIRFLOW on local machines is not as easy as it sounds.
-5. Apache Spark SQL and Pyspark solve purpose when there are more **1 million rows**, else better to stick with Python only.
-6. AWS is very powerful and has unlimited potential anyone can tap. More importantly, need to be careful with the pricing.
+4. Apache Spark SQL and Pyspark solve purpose when there are more **1 million rows**, else better to stick with Python only.
+5. AWS is very powerful and has unlimited potential anyone can tap. More importantly, need to be careful with the pricing.
 
 ---
 ***References & Acknowledgements:***
