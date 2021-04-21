@@ -1,7 +1,6 @@
 # DATA ENGINEERING CAPSTONE PROJECT
 
 ## Project
----
 Developing a data pipeline that creates an analytical database  for querying information about the reviews and ratings hosted on redshift database. The main goal of this project is to build an end to end data pipeline which is capable of big volumes of data.
 
 ## Scope of the Project
@@ -13,14 +12,14 @@ Airbnb wants to analyze the historical data of all the listings on its platform 
 
 ## Data Description and Sources
 
-The data has been scoped from an awesome site [inside-airbnb](http://insideairbnb.com/get-the-data.html) which contains the Airbnb actual data. This dataset contains the information about various aspects of Reviews, Calendar, Listings of many cities. As I was interested in Austin and LA, I took the respective data and tried to extract a meaningful information. 
-The data comes in three files namely REVIEWS, LISTINGS, CALENDAR.
-* Reviews File contains all the reviews of the listing on Airbnb website
-  * This file contains more than 1,000,000 rows/records.
-* Listing File contains all the house listings on Airbnb
-  * The number of listing in Austin and LA come around 40000 rows/records.
-* Calendar file contains the availability of the listing across a huge range of dates
-  * This file contains more than 13,000,000 rows/records.
+The data has been scoped from an awesome site [inside-airbnb](http://insideairbnb.com/get-the-data.html) which contains the Airbnb actual data. This dataset contains the information about various aspects of Reviews, Calendar, Listings of many cities. As I was interested in Austin,TX and Los Angeles (LA),CA, I took the respective data and tried to extract a meaningful information. 
+The data comes in three files namely ```REVIEWS, LISTINGS, CALENDAR```.
+* ```Reviews``` File contains all the reviews of the listing on Airbnb website
+  * This file contains more than ***1,000,000 rows/records***.
+* ```Listing``` File contains all the house listings on Airbnb
+  * The number of listing in Austin and LA come around ***40000 rows/records***.
+* ```Calendar``` file contains the availability of the listing across a huge range of dates
+  * This file contains more than ***13,000,000 rows/records***.
 
 
 ## Exploring and Assessing the Data
@@ -62,7 +61,7 @@ The Data Warehouse tables are the Fact and Dimension Tables:
   * ```DIM_CALENDARS```: Information about the property listing of its availbility, adjusted price, etc.
   * ```DIM_REVIEWS```: Information about reviews submitted by users for every listing they stayed including the information like reviewer name and date of the review.
 * ***The Fact Table***
-  * ```Airbnb_facts_Austin_LA``` contains the important measures like ***number of reviews, average review ratings and potential earnings*** along with the information about the corresponding property listing id, host_id, neighbourhood and . 
+  * ```FACT_Airbnb_Austin_LA``` contains the important measures like ***number of reviews, average review ratings and potential earnings*** along with the information about the corresponding property listing id, host_id, neighbourhood and . 
 
 ![Schema-based Data Model](https://user-images.githubusercontent.com/48939255/115430537-1011cd80-a1ca-11eb-9ecf-91d31e1673bc.png)
 
@@ -145,6 +144,7 @@ This DAG is responsible for the ETL Process and creating a datalake.
 3. Redshift COPY Command: COPY, INSERT commands in redshift work seemless when the data type of the columns match or else understanding the error message is even more painful
 4. Install AIRFLOW on local machines is not as easy as it sounds.
 5. Apache Spark SQL and Pyspark solve purpose when there are more **1 million rows**, else better to stick with Python only.
+6. AWS is very powerful and has unlimited potential anyone can tap. More importantly need to be careful with the pricing.
 
 ---
 ***References & Acknowledgements:***
