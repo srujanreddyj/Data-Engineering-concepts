@@ -1,20 +1,20 @@
 # DATA ENGINEERING CAPSTONE PROJECT
 
 ## Project
-Developing a data pipeline that creates an analytical database  for querying information about the reviews and ratings hosted on redshift database. The main goal of this project is to build an end to end data pipeline which is capable of big volumes of data.
+Developing a data pipeline that creates an analytical database for querying information about the reviews and ratings hosted on the redshift database. The main goal of this project is to build an end-to-end data pipeline that is capable of big volumes of data.
 
 ## Scope of the Project
-Airbnb wants to analyze the historical data of all the listings on its platform since its initial stages and improve the their recommendations to their customers. To do this, they need to gather average rating, number of ratings and prices of the airbnb listings over the years. As a data engineer of the company, I took up the task of building an ETL pipeline that extracts the releveant data like listings, properties, hosts details and load it to data warehouse that makes querying for the decision makers and analysts easier. 
+Airbnb wants to analyze the historical data of all the listings on its platform since its initial stages and improve its recommendations to its customers. To do this, they need to gather the average rating, number of ratings, and prices of the Airbnb listings over the years. As a data engineer of the company, I took up the task of building an ETL pipeline that extracts the relevant data like listings, properties, hosts details, and load it to a data warehouse that makes querying for the decision-makers and analysts easier.  
 
-#### End Use Cases
-* Query based analytical tables that can be used by decision makers
+#### End-Use Cases
+* Query-based analytical tables that can be used by decision-makers
 * Analytical Table that can be used by analysts to explore more and develop recommendations for users.
 
 ## Data Description and Sources
 
-The data has been scoped from an awesome site [inside-airbnb](http://insideairbnb.com/get-the-data.html) which contains the Airbnb actual data. This dataset contains the information about various aspects of Reviews, Calendar, Listings of many cities. As I was interested in Austin,TX and Los Angeles (LA),CA, I took the respective data and tried to extract a meaningful information. 
+The data has been scoped from an awesome site [inside-airbnb](http://insideairbnb.com/get-the-data.html) which contains the Airbnb actual data. This dataset contains information about various aspects of Reviews, Calendars, Listings of many cities. As I was interested in Austin, TX and Los Angeles (LA), CA, I took the respective data and tried to extract meaningful information. 
 The data comes in three files namely ```REVIEWS, LISTINGS, CALENDAR```.
-* ```Reviews``` File contains all the reviews of the listing on Airbnb website
+* ```Reviews``` File contains all the reviews of the listing on the Airbnb website
   * This file contains more than ***1,000,000 rows/records***.
 * ```Listing``` File contains all the house listings on Airbnb
   * The number of listing in Austin and LA come around ***40000 rows/records***.
@@ -22,46 +22,46 @@ The data comes in three files namely ```REVIEWS, LISTINGS, CALENDAR```.
   * This file contains more than ***13,000,000 rows/records***.
 
 
-## Exploring and Assessing the Data
-First step is to explore the data to identify the data quality issues like null values, duplicate data etc.
- * ```Calendar``` and  ```Reviews``` datasets are of good quality, but contains some null column values. 
-   * If the listing_id and host_id have null column values, then the respective rows are dropped from the table.
-* ```Listing``` dataset is which contains a lot of columns. 
-  * Making sense from all the columns would take time. In our case we are going to use a subset of columns related to the goal of this project. 
-  * Again this dataset contains many null values. Columns values with null in listing_id, host_id have been dropped. 
-  * After dropping the null columns & rows, we will be uploading the full dataset into data lake so as to have the ability to use thew other columns that we weren't able to use in this project.
-
 ## Tools and Technologies
-The tools used in this projects are notebooks, Apache Spark, Amazon S3, Amazon Redshift, Apache Airflow.
+The tools used in this project are notebooks, Apache Spark, Amazon S3, Amazon Redshift, Apache Airflow.
 * To explore the dataset, I started with Google Colab free computing resources and Apache Spark. 
-  * Spark is better in handling huge data records. Spark provides a great performace as it stores data in-memory shared across the cluster.
-* The data lake is stored on Amazon S3, an object storgae service that offers scalability, data availability, security and performance. 
+  * Spark is better at handling huge data records. Spark provides a great performance as it stores data in-memory shared across the cluster.
+* The data lake is stored on Amazon S3, an object storage service that offers scalability, data availability, security, and performance. 
   * S3 is perfect for storing data partitioned and grouped in files for low cost and with a lot of flexibility.
   * Also it has the flexibility in adding and removing additional data
-  * Ease of schema design and avaialbility to a wide range of users
-* For ETL process, I used an EMR Cluster on AWS Redshift.
-* To orchestarte the overall data pipeline, I used Apache Airflow as it provides an intutitive UI helping us to track the progress of our pipelines.
+  * Ease of schema design and availability to a wide range of users
+* For the ETL process, I used an EMR Cluster on AWS Redshift.
+* To orchestrate the overall data pipeline, I used Apache Airflow as it provides an intuitive UI helping us to track the progress of our pipelines.
+## Exploring and Assessing the Data
+The first step is to explore the data to identify the data quality issues like null values, duplicate data, etc.
+ * ```Calendar``` and  ```Reviews``` datasets are of good quality but contain some null column values. 
+   * If the listing_id and host_id have null column values, then the respective rows are dropped from the table.
+* ```Listing``` dataset is which contains a lot of columns. 
+  * Making sense from all the columns would take time. In our case, we are going to use a subset of columns related to the goal of this project. 
+  * Again this dataset contains many null values. Columns values with null in listing_id, host_id have been dropped. 
+  * After dropping the null columns & rows, we will be uploading the full dataset into the data lake to have the ability to use the other columns that we weren't able to use in this project.
 
 
 ## Defining the Data Model
 The final data model includes 4 dimension tables and 1 Fact table.
-This data model will facilitate the daily reporting tasks for the teams reagrding who are the hosts, what are the properties listed, what are the most reviews, reviewers, which neighbourhood and help in building recommendations to the users and improve the services. 
+This data model will facilitate the daily reporting tasks for the teams regarding who are the hosts, what are the properties listed, what are the most reviews, reviewers, which neighborhood and help in building recommendations to the users and improve the services. 
 
-#### Explanation of the Data Model:
-For this project we are building a optimized data lake which can be useful to analytics. The data is prepared, compressed and partitioned by certain columns to allow for fast queries.
-We are constructing a snow-flake schema with 1 fact table and multiple dimension Tables.
+#### Explanation of the Data Model
+For this project, we are building an optimized data lake that can be useful to analytics. The data is prepared, compressed, and partitioned by certain columns to allow for fast queries.
+We are constructing a snow-flake schema with 1 fact table and multiple dimension tables.
 After reviewing and cleaning the datasets, we are required to build three staging table which can be used for preprocessing the data before loading into the Data warehouse tables. 
 
 ***DATA DICTIONARY***
 
 The Data Warehouse tables are the Fact and Dimension Tables:
 * ***Dimension Tables***:
-  * ```DIM_HOSTS```: All the essential information of the hosts with their listing IDs.
-  * ```DIM_PROPERTIES```: All the information about ***each property and its attributes***.
-  * ```DIM_CALENDARS```: Information about the property listing of its availbility, adjusted price, etc.
-  * ```DIM_REVIEWS```: Information about reviews submitted by users for every listing they stayed including the information like reviewer name and date of the review.
+  * ``` DIM_HOSTS```: All the essential information of the hosts with their listing IDs.
+  * ``` DIM_PROPERTIES```: All the information about ***each property and its attributes***.
+  * ```DIM_CALENDARS```: Information about the property listing of its availability, adjusted price, etc.
+  * ``` DIM_REVIEWS```: Information about reviews submitted by users for every listing they stayed including the information like reviewer name and date of the review.
 * ***The Fact Table***
-  * ```FACT_Airbnb_Austin_LA``` contains the important measures like ***number of reviews, average review ratings and potential earnings*** along with the information about the corresponding property listing id, host_id, neighbourhood and . 
+  * ```FACT_Airbnb_Austin_LA``` contains the important measures like ***number of reviews, average review ratings, and potential earnings*** along with the information about the corresponding property listing id, host_id, neighborhood and. 
+
 
 ![Schema-based Data Model](https://user-images.githubusercontent.com/48939255/115430537-1011cd80-a1ca-11eb-9ecf-91d31e1673bc.png)
 
