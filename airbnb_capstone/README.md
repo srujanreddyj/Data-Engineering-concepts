@@ -52,6 +52,9 @@ This data model will facilitate the daily reporting tasks for the teams reagrdin
 For this project we are building a optimized data lake which can be useful to analytics. The data is prepared, compressed and partitioned by certain columns to allow for fast queries.
 We are constructing a snow-flake schema with 1 fact table and multiple dimension Tables.
 After reviewing and cleaning the datasets, we are required to build three staging table which can be used for preprocessing the data before loading into the Data warehouse tables. 
+
+***DATA DICTIONARY***
+
 The Data Warehouse tables are the Fact and Dimension Tables:
  The 4 Dimension Tables:
   * ```DIM_HOSTS```: All the essential information of the hosts with their listing IDs
@@ -70,7 +73,6 @@ The design of the pipeline can be summarized as:
 * Load a cleaned dataset and intermediate artifacts to S3 destination locations.
 * Build dimension tables and fact table by calculating summary statistics/measures using EMR Cluster, SQL and Airflow operators.
 
-***DATA DICTIONARY***
 
 ![image](https://user-images.githubusercontent.com/48939255/115416339-501e8380-a1bd-11eb-998e-46c867168941.png)
 
