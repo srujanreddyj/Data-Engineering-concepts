@@ -78,7 +78,9 @@ The idea behind using the datalakes is that they provide us with the flexibility
 * My ETL pipeline includes 20 tasks:
   * ```START_OPERATOR```, ```MID_OPERATOR```, ```END_TASK``` are the dummy tasks, which help in starting and ensuring all tasks are syncronized with each other tasks and finished the execution
   * ```CREATE_STAGGING_REVIEWS_Table```, ```CREATE_STAGGING_CALENDARS_Table```, ```CREATE_STAGGING_LISTINGS_Table``` are the tasks for creating Stagging tables on Redshift Cluster.
+    *  These tasks are created using ```CreateTablesOperator``` which includes a PostgresOperator
   * ```STAGE_REVIEWS```, ```STAGE_CALENDARS```, ```STAGE_LISTINGS``` are the tasks responsible for loading the data from S3 to Redshift cluster.
+    * These tasks are created using the ```StagetoRedshiftOperator``` 
   * ```CREATE_Table_DIM_HOSTS```, ```CREATE_Table_DIM_PROPERTIES```, ```CREATE_Table_DIM_CALENDARS```, ```CREATE_Table_DIM_REVIEWS```, ```CREATE_Table_FACT_AIRBNB``` are the tasks for creating Dimensions tables and fact table on Redshift cluster.
   * ```LOAD_TABLE_DIM_PROPERTIES```, ```LOAD_TABLE_DIM_HOSTS```, ```LOAD_TABLE_DIM_REVIEWS```, ```LOAD_TABLE_DIM_CALENDARS``` are the tasks for copying the data from Stagging Tables with respective conditions.
   * ```LOAD_Fact_AIRBNB_AUSTIN_LA_TABLE``` is the task for measuring events from dimensions tables to build a query-based fact table for decision makers.
