@@ -6,7 +6,7 @@ Developing a data pipeline that creates an analytical database  for querying inf
 ## Scope of the Project
 Airbnb wants to analyze the historical data of all the listings on its platform since its initial stages and improve the their recommendations to their customers. To do this, they need to gather average rating, number of ratings and prices of the airbnb listings over the years. As a data engineer of the company, I took up the task of building an ETL pipeline that extracts the releveant data like listings, properties, hosts details and load it to data warehouse that makes querying for the decision makers and analysts easier. 
 
-#### END USE CASES:
+#### End Use Cases
 * Query based analytical tables that can be used by decision makers
 * Analytical Table that can be used by analysts to explore more and develop recommendations for users.
 
@@ -31,7 +31,7 @@ First step is to explore the data to identify the data quality issues like null 
   * Again this dataset contains many null values. Columns values with null in listing_id, host_id have been dropped. 
   * After dropping the null columns & rows, we will be uploading the full dataset into data lake so as to have the ability to use thew other columns that we weren't able to use in this project.
 
-#### Tools and Technologies:
+## Tools and Technologies
 The tools used in this projects are notebooks, Apache Spark, Amazon S3, Amazon Redshift, Apache Airflow.
 * To explore the dataset, I started with Google Colab free computing resources and Apache Spark. 
   * Spark is better in handling huge data records. Spark provides a great performace as it stores data in-memory shared across the cluster.
@@ -113,7 +113,7 @@ This DAG is responsible for the ETL Process and creating a datalake.
 
 ![image](https://user-images.githubusercontent.com/48939255/115416376-5a408200-a1bd-11eb-92a0-5c907ab13bf4.png)
 
-### Running the Project
+## Running the Project
 1. Explore the dataset as mentioned in above notebook file, transform the data and store the processed result in S3.
 2. Create AWS Redshift Cluster using either the console or through the CLI.
 3. Ensure the airflow instance is up and running.
