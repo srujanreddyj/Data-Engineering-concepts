@@ -73,13 +73,13 @@ The design of the pipeline can be summarized as:
 
 The idea behind using the data lakes is that they provide us with flexibility in the number of different ways we might use the data.
 
-* Data Processing
+* ***Data Processing***
   *  For Data Processing, I used SQL to process data from the S3 bucket. For each task, an SQL statement has been provided in ```SQLQUEIRES.py``` which does the data ingestion process smoothly.
   *  This data processing file contains all the queries to create tables, inserting data from stagging tables, and building query tables.
 
-* ETL pipeline includes 20 tasks:
-  * ```START_OPERATOR```, ```MID_OPERATOR```, ```END_TASK``` are the dummy tasks, which help in starting and ensuring all tasks are synchronized with each other tasks and finished the execution
-  * ```CREATE_STAGGING_REVIEWS_Table```, ```CREATE_STAGGING_CALENDARS_Table```, ```CREATE_STAGGING_LISTINGS_Table``` are the tasks for creating Staging tables on Redshift Cluster.
+* ***ETL pipeline includes 20 tasks:***
+  * ```START_OPERATOR```, ```MID_OPERATOR```, ```END_TASK``` are the ***dummy tasks***, which help in starting and ensuring ***all tasks are synchronized with each other tasks*** and finish the execution
+  * ```CREATE_STAGGING_REVIEWS_Table```, ```CREATE_STAGGING_CALENDARS_Table```, ```CREATE_STAGGING_LISTINGS_Table``` are the tasks for creating Staging tables on Redshift Cluster for respective data files.
     *  These tasks are created using ```CreateTablesOperator``` which includes a PostgresOperator
   * ```STAGE_REVIEWS```, ```STAGE_CALENDARS```, ```STAGE_LISTINGS``` are the tasks responsible for loading the data from S3 to Redshift cluster.
     * These tasks are created using the ```StagetoRedshiftOperator``` 
