@@ -79,7 +79,7 @@ The idea behind using the datalakes is that they provide us with the flexibility
   *  For Data Processing, I used SQL to process data from S3 bucket. For each task, an SQL statement has been providded in ```SQLQUEIRES.py``` which does the data ingestion process smoothly.
   *  This data processing file contains all the queries to create tables, inserting data from stagging tables and building query tables.
 
-* My ETL pipeline includes 20 tasks:
+* ETL pipeline includes 20 tasks:
   * ```START_OPERATOR```, ```MID_OPERATOR```, ```END_TASK``` are the dummy tasks, which help in starting and ensuring all tasks are syncronized with each other tasks and finished the execution
   * ```CREATE_STAGGING_REVIEWS_Table```, ```CREATE_STAGGING_CALENDARS_Table```, ```CREATE_STAGGING_LISTINGS_Table``` are the tasks for creating Stagging tables on Redshift Cluster.
     *  These tasks are created using ```CreateTablesOperator``` which includes a PostgresOperator
@@ -139,9 +139,14 @@ This DAG is responsible for the ETL Process and creating a datalake.
 
 
 
-## LESSONS LEARNED:
+## LESSONS LEARNED
 1. Using Parquet data files is much faster and AWS ability to read these files is superior compared csv when text column values are present. csv files are larger in space compared to parquet files.
 2. Null Fields will not be present in parquet and thereby mismatch of columns arise in AWS Redshift.
 3. Redshift COPY Command: COPY, INSERT commands in redshift work seemless when the data type of the columns match or else understanding the error message is even more painful
 4. Install AIRFLOW on local machines is not as easy as it sounds.
 5. Apache Spark SQL and Pyspark solve purpose when there are more **1 million rows**, else better to stick with Python only.
+
+---
+***References & Acknowledgements:***
+Udacity and many github profiles.
+
