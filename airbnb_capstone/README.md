@@ -62,7 +62,6 @@ The Data Warehouse tables are the Fact and Dimension Tables:
 * ***The Fact Table***
   * ```FACT_Airbnb_Austin_LA``` contains the important measures like ***number of reviews, average review ratings, and potential earnings*** along with the information about the corresponding property listing id, host_id, neighborhood and. 
 
-
 ![Schema-based Data Model](https://user-images.githubusercontent.com/48939255/115430537-1011cd80-a1ca-11eb-9ecf-91d31e1673bc.png)
 
 ## ETL to Model the Data -- The Data Pipeline
@@ -70,27 +69,27 @@ The design of the pipeline can be summarized as:
 * Extract data from source S3 location.
 * Process and Transform it using Apache Spark, SQL, Python
 * Load a cleaned dataset and intermediate artifacts to S3 destination locations.
-* Build dimension tables and fact table by calculating summary statistics/measures using EMR Cluster, SQL and Airflow operators.
+* Build dimension tables and fact tables by calculating summary statistics/measures using EMR Cluster, SQL, and Airflow operators.
 
-The idea behind using the datalakes is that they provide us with the flexibility in the number of different ways we might use the data.
+The idea behind using the data lakes is that they provide us with flexibility in the number of different ways we might use the data.
 
 * Data Processing
-  *  For Data Processing, I used SQL to process data from S3 bucket. For each task, an SQL statement has been providded in ```SQLQUEIRES.py``` which does the data ingestion process smoothly.
-  *  This data processing file contains all the queries to create tables, inserting data from stagging tables and building query tables.
+  *  For Data Processing, I used SQL to process data from the S3 bucket. For each task, an SQL statement has been provided in ```SQLQUEIRES.py``` which does the data ingestion process smoothly.
+  *  This data processing file contains all the queries to create tables, inserting data from stagging tables, and building query tables.
 
 * ETL pipeline includes 20 tasks:
-  * ```START_OPERATOR```, ```MID_OPERATOR```, ```END_TASK``` are the dummy tasks, which help in starting and ensuring all tasks are syncronized with each other tasks and finished the execution
-  * ```CREATE_STAGGING_REVIEWS_Table```, ```CREATE_STAGGING_CALENDARS_Table```, ```CREATE_STAGGING_LISTINGS_Table``` are the tasks for creating Stagging tables on Redshift Cluster.
+  * ```START_OPERATOR```, ```MID_OPERATOR```, ```END_TASK``` are the dummy tasks, which help in starting and ensuring all tasks are synchronized with each other tasks and finished the execution
+  * ```CREATE_STAGGING_REVIEWS_Table```, ```CREATE_STAGGING_CALENDARS_Table```, ```CREATE_STAGGING_LISTINGS_Table``` are the tasks for creating Staging tables on Redshift Cluster.
     *  These tasks are created using ```CreateTablesOperator``` which includes a PostgresOperator
   * ```STAGE_REVIEWS```, ```STAGE_CALENDARS```, ```STAGE_LISTINGS``` are the tasks responsible for loading the data from S3 to Redshift cluster.
     * These tasks are created using the ```StagetoRedshiftOperator``` 
   * ```CREATE_Table_DIM_HOSTS```, ```CREATE_Table_DIM_PROPERTIES```, ```CREATE_Table_DIM_CALENDARS```, ```CREATE_Table_DIM_REVIEWS```, ```CREATE_Table_FACT_AIRBNB``` are the tasks for creating Dimensions tables and fact table on Redshift cluster.
      *  These tasks are created using ```CreateTablesOperator``` which includes a PostgresOperator
-  * ```LOAD_TABLE_DIM_PROPERTIES```, ```LOAD_TABLE_DIM_HOSTS```, ```LOAD_TABLE_DIM_REVIEWS```, ```LOAD_TABLE_DIM_CALENDARS``` are the tasks for copying the data from Stagging Tables with respective conditions.
+  * ``` LOAD_TABLE_DIM_PROPERTIES```, ```LOAD_TABLE_DIM_HOSTS```, ```LOAD_TABLE_DIM_REVIEWS```, ```LOAD_TABLE_DIM_CALENDARS``` are the tasks for copying the data from Stagging Tables with respective conditions.
      * These tasks are created using the ```LoadDimensionOperator```
-  * ```LOAD_Fact_AIRBNB_AUSTIN_LA_TABLE``` is the task for measuring events from dimensions tables to build a query-based fact table for decision makers.
+  * ```LOAD_Fact_AIRBNB_AUSTIN_LA_TABLE``` is the task for measuring events from dimensions tables to build a query-based fact table for decision-makers.
      * These tasks are created using the ```LoadFactOperator```
-  * ```RUN_DATA_QUALITY_CHECKS``` is the task for performing data quality checks by running sql statements to validate the data and ensures that the specified table has rows
+  * ```RUN_DATA_QUALITY_CHECKS``` is the task for performing data quality checks by running SQL statements to validate the data and ensures that the specified table has rows
      * These tasks are created using the ```DataQualityOperator```
 
 
@@ -114,7 +113,7 @@ This DAG is responsible for the ETL Process and creating a datalake.
 ![image](https://user-images.githubusercontent.com/48939255/115416376-5a408200-a1bd-11eb-92a0-5c907ab13bf4.png)
 
 ## Running the Project
-1. Explore the dataset as mentioned in above notebook file, transform the data and store the processed result in S3.
+1. Explore the dataset as mentioned in the above notebook file, transform the data and store the processed result in S3.
 2. Create AWS Redshift Cluster using either the console or through the CLI.
 3. Ensure the airflow instance is up and running.
 4. Ensure all the content of dags and plugins are present in the Airflow work environment as needed.
@@ -125,28 +124,29 @@ This DAG is responsible for the ETL Process and creating a datalake.
 
 ## Addressing Other Scenarios
 * ****The data was increased by 100x.****
-  * The pipeline can be made autoscalling enabled and this will help bigger amount of data be processed without many bottlenecks. 
-  * At present the highest size of the data we have used is less than 1GB. So increasing 100x scenario would not be considered as a major issue, because Amazon's Redshift or S3 are commonly known for reliability and can deal with VERY large data. Thus, in the case of this scenario, the size of the S3 bucket would be increased and accordingly the tables in Redshift would grow too. 
+  * The pipeline can be made autoscaling enabled and this will help a bigger amount of data be processed without many bottlenecks. 
+  * At present the highest size of the data we have used is less than 1GB. So increasing the 100x scenario would not be considered a major issue, because Amazon's Redshift or S3 are commonly known for reliability and can deal with VERY large data. Thus, in the case of this scenario, the size of the S3 bucket would be increased, and accordingly, the tables in Redshift would grow too. 
   * Also we could use increase EMR cluster size to handle larger volumes of data nodes for faster processing.
-  * But there may be an issue with airflow container. In production, Airflow should be run on a cluster of machines.
-* ****The pipelines would be run on a daily basis by 7 am every day.****
-  * This scenario can be dealt easily as we are using Apache Airflow. The teams can easily set the Airflow pipelines to a schedule interval to be daily at 7 am on.
-  * Regualar email updates on failures and quality can also be enabled.
+  * But there may be an issue with the Airflow container. In production, Airflow should be run on a cluster of machines.
+* ****The pipelines would be run daily by 7 am every day.****
+  * This scenario can be dealt with ease as we are using Apache Airflow. The teams can easily set the Airflow pipelines to a scheduled interval to be daily at 7 am on.
+  * Regular email updates on failures and quality can also be enabled.
 * ****The database needed to be accessed by 100+ people.****
-  * Amazon web services are known for its stability and scalability features. So, a concurrency limit for the Redshift cluster can be set and also be expanded as deemed necessary.
+  * Amazon web services are known for their stability and scalability features. So, a concurrency limit for the Redshift cluster can be set and also be expanded as deemed necessary.
   * Also AWS comes with auto-scaling capabilities and good read performance and hence would not be considered as an issue and needed major changes in the platform can be done properly.
 
 
 
 ## LESSONS LEARNED
-1. Using Parquet data files is much faster and AWS ability to read these files is superior compared csv when text column values are present. csv files are larger in space compared to parquet files.
+1. Using Parquet data files is much faster and AWS's ability to read these files is superior compared to CSV when text column values are present. CSV files are larger in space compared to parquet files.
 2. Null Fields will not be present in parquet and thereby mismatch of columns arise in AWS Redshift.
-3. Redshift COPY Command: COPY, INSERT commands in redshift work seemless when the data type of the columns match or else understanding the error message is even more painful
+3. Redshift COPY Command: COPY, INSERT commands in redshift work seamless when the data type of the columns match or else debugging and understanding the error message will take time forever.
 4. Install AIRFLOW on local machines is not as easy as it sounds.
 5. Apache Spark SQL and Pyspark solve purpose when there are more **1 million rows**, else better to stick with Python only.
-6. AWS is very powerful and has unlimited potential anyone can tap. More importantly need to be careful with the pricing.
+6. AWS is very powerful and has unlimited potential anyone can tap. More importantly, need to be careful with the pricing.
 
 ---
 ***References & Acknowledgements:***
-Udacity and many github profiles.
+Udacity and many GitHub profiles.
+
 
