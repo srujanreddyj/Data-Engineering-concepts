@@ -56,31 +56,24 @@ After reviewing and cleaning the datasets, we are required to build three stagin
 ***DATA DICTIONARY***
 
 The Data Warehouse tables are the Fact and Dimension Tables:
-* The 4 Dimension Tables:
-  * ```DIM_HOSTS```: All the essential information of the hosts with their listing IDs
-  * ```DIM_PROPERTIES```: All the information about each property and its attributes
-  * ```DIM_CALENDARS```: Information about the property listing of its availbility, adjusted price, etc
-  * ```DIM_REVIEWS```: Information about reviews submitted by users for every listing they stayed including the information like reviewer name and date of the review 
-* The Fact Table
-  * ```Airbnb_facts_Austin_LA``` contains the important measures like number of reviews, average review ratings and potential earnings along with the information about the corresponding property listing id, host_id, neighbourhood and . 
+* ***Dimension Tables***:
+  * ```DIM_HOSTS```: All the essential information of the hosts with their listing IDs.
+  * ```DIM_PROPERTIES```: All the information about ***each property and its attributes***.
+  * ```DIM_CALENDARS```: Information about the property listing of its availbility, adjusted price, etc.
+  * ```DIM_REVIEWS```: Information about reviews submitted by users for every listing they stayed including the information like reviewer name and date of the review.
+* ***The Fact Table***
+  * ```Airbnb_facts_Austin_LA``` contains the important measures like ***number of reviews, average review ratings and potential earnings*** along with the information about the corresponding property listing id, host_id, neighbourhood and . 
 
 ![Schema-based Data Model](https://user-images.githubusercontent.com/48939255/115430537-1011cd80-a1ca-11eb-9ecf-91d31e1673bc.png)
 
 ## ETL to Model the Data -- The Data Pipeline
 The design of the pipeline can be summarized as:
 * Extract data from source S3 location.
-* Process and Transform it using Apache Spark, SQL and custom Airflow oeprators
+* Process and Transform it using Apache Spark, SQL, Python
 * Load a cleaned dataset and intermediate artifacts to S3 destination locations.
 * Build dimension tables and fact table by calculating summary statistics/measures using EMR Cluster, SQL and Airflow operators.
 
-
-![image](https://user-images.githubusercontent.com/48939255/115416339-501e8380-a1bd-11eb-998e-46c867168941.png)
-
-This DAG is responsible for the ETL Process and creating a datalake.
-
-![image](https://user-images.githubusercontent.com/48939255/115415290-65df7900-a1bc-11eb-8928-d8b61838ca32.png)
-
-The ideas behind the datalakes is that they provide us with the flexibility in the number of different ways we might use the data.
+The idea behind using the datalakes is that they provide us with the flexibility in the number of different ways we might use the data.
 
 * My ETL pipeline includes 20 tasks:
   * ```START_OPERATOR```, ```MID_OPERATOR```, ```END_TASK``` are the dummy tasks, which help in starting and ensuring all tasks are syncronized with each other tasks and finished the execution
@@ -94,6 +87,14 @@ The ideas behind the datalakes is that they provide us with the flexibility in t
 * Data Processing
   *  For Data Processing, I used SQL to process data from S3 bucket. For each task, an SQL statement has been providded in ```SQLQUEIRES.py``` which does the data ingestion process smoothly.
   *  This data processing file contains all the queries to create tables, inserting data from stagging tables and building query tables.
+
+***AIRFLOW OPERATORS in the Pipeline:***
+![image](https://user-images.githubusercontent.com/48939255/115416339-501e8380-a1bd-11eb-998e-46c867168941.png)
+
+***COMPLETE DATA PIPELINE DESIGN in AIRFLOW*** 
+This DAG is responsible for the ETL Process and creating a datalake.
+
+![image](https://user-images.githubusercontent.com/48939255/115415290-65df7900-a1bc-11eb-8928-d8b61838ca32.png)
 
 ***Tree graph of ETL Pipeline:***
 
