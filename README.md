@@ -24,10 +24,15 @@
    * Built a data lake on **AWS Cloud using Spark and AWS EMR CLuster**. 
    * Scaled up the current ETL pipeline by moving the data warehouse to a data lake.
    * The Data lake acts as a single source analytics palform and an ETL jobs are written in Spark that extracts data from **S3**, stages them in **Redshift**, process the data into **analytics tables** using **Spark**, and loads them back into **S3**.
-   * ***Proficiencies learned and used: Spark, S3, EMR, Athena, Parquet.***
+   * ***Proficiencies learned and used: Spark, S3, EMR, Parquet.***
 4. #### [Data Pipelines with Airflow](https://github.com/srujanreddyj/data-engineering-concepts/tree/master/airflow)
    * Created and automated a set of data pipelines with Airflow and Python.
    * Wrote custom operators, plugins to perform tasks like staging data, tranforming data into star schema by creating dimension and fact tables, and validation through data quality checks
    * I scheduled ETL jobs in Airflow, created project related plugins, operators and automated the pipeline execution leading to better monitoring and debugging production pipelines. 
    * ***Proficiencies learned and used: Apache Airflow, S3, Amazon Redshift, Python.***
+5. #### [CAPSTONE](https://github.com/srujanreddyj/Data-Engineering-concepts/blob/master/airbnb_capstone/README.md)
+    * Developed an ETL Pipeline for Airbnb that extracts data from **S3 Bucket**, stages them in **Redshift cluster**, and transforms the data into **dimension and fact tables** for analytics teams.
+    * Created automated set of data pipelines using Apache Airflow using custome operators, plugins and validated through data quality checks
+    * Created Scheuled ETL jobs in Airflow
+    * ***Proficiencies learned and used: PostgreSQL, Apache Spark, S3, EMR, Parquet, Amazon Redshift, Python, SnowFlake Schema.***
 
