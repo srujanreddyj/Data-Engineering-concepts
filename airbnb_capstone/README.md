@@ -75,6 +75,10 @@ The design of the pipeline can be summarized as:
 
 The idea behind using the datalakes is that they provide us with the flexibility in the number of different ways we might use the data.
 
+* Data Processing
+  *  For Data Processing, I used SQL to process data from S3 bucket. For each task, an SQL statement has been providded in ```SQLQUEIRES.py``` which does the data ingestion process smoothly.
+  *  This data processing file contains all the queries to create tables, inserting data from stagging tables and building query tables.
+
 * My ETL pipeline includes 20 tasks:
   * ```START_OPERATOR```, ```MID_OPERATOR```, ```END_TASK``` are the dummy tasks, which help in starting and ensuring all tasks are syncronized with each other tasks and finished the execution
   * ```CREATE_STAGGING_REVIEWS_Table```, ```CREATE_STAGGING_CALENDARS_Table```, ```CREATE_STAGGING_LISTINGS_Table``` are the tasks for creating Stagging tables on Redshift Cluster.
@@ -82,13 +86,15 @@ The idea behind using the datalakes is that they provide us with the flexibility
   * ```STAGE_REVIEWS```, ```STAGE_CALENDARS```, ```STAGE_LISTINGS``` are the tasks responsible for loading the data from S3 to Redshift cluster.
     * These tasks are created using the ```StagetoRedshiftOperator``` 
   * ```CREATE_Table_DIM_HOSTS```, ```CREATE_Table_DIM_PROPERTIES```, ```CREATE_Table_DIM_CALENDARS```, ```CREATE_Table_DIM_REVIEWS```, ```CREATE_Table_FACT_AIRBNB``` are the tasks for creating Dimensions tables and fact table on Redshift cluster.
+     *  These tasks are created using ```CreateTablesOperator``` which includes a PostgresOperator
   * ```LOAD_TABLE_DIM_PROPERTIES```, ```LOAD_TABLE_DIM_HOSTS```, ```LOAD_TABLE_DIM_REVIEWS```, ```LOAD_TABLE_DIM_CALENDARS``` are the tasks for copying the data from Stagging Tables with respective conditions.
+     * These tasks are created using the ```LoadDimensionOperator```
   * ```LOAD_Fact_AIRBNB_AUSTIN_LA_TABLE``` is the task for measuring events from dimensions tables to build a query-based fact table for decision makers.
+     * These tasks are created using the ```LoadFactOperator```
   * ```RUN_DATA_QUALITY_CHECKS``` is the task for performing data quality checks by running sql statements to validate the data and ensures that the specified table has rows
+     * These tasks are created using the ```DataQualityOperator```
 
-* Data Processing
-  *  For Data Processing, I used SQL to process data from S3 bucket. For each task, an SQL statement has been providded in ```SQLQUEIRES.py``` which does the data ingestion process smoothly.
-  *  This data processing file contains all the queries to create tables, inserting data from stagging tables and building query tables.
+
 
 ***AIRFLOW OPERATORS in the Pipeline:***
 ![image](https://user-images.githubusercontent.com/48939255/115416339-501e8380-a1bd-11eb-998e-46c867168941.png)
