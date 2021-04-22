@@ -36,10 +36,10 @@ The tools used in this project are notebooks, Apache Spark, Amazon S3, Amazon Re
 The first step is to explore the data to identify the data quality issues like null values, duplicate data, etc.
  * ```Calendar``` and  ```Reviews``` datasets are of good quality but contain some null column values. 
    * If the listing_id and host_id have null column values, then the respective rows are dropped from the table.
-* ```Listing``` dataset is which contains a lot of columns. 
-  * Making sense from all the columns would take time. In our case, we are going to use a subset of columns related to the goal of this project. 
-  * Again this dataset contains many null values. Columns values with null in listing_id, host_id have been dropped. 
-  * After dropping the null columns & rows, we will be uploading the full dataset into the data lake to have the ability to use the other columns that we weren't able to use in this project.
+ * ```Listing``` dataset is which contains a lot of columns. 
+   * Making sense from all the columns would take time. In our case, we are going to use a subset of columns related to the goal of this project. 
+   * Again this dataset contains many null values. Columns values with null in listing_id, host_id have been dropped. 
+   * After dropping the null columns & rows, we will be uploading the full dataset into the data lake to have the ability to use the other columns that we weren't able to use in this project.
 
 
 ## Defining the Data Model
