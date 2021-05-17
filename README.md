@@ -13,7 +13,7 @@
    * Developed a Star Schema database using optimized definitions of Fact and Dimension tables. Normalization of tables.
    * Created a NoSQL database using Apache Cassandra based on the schema outlined above. 
       * Developed denormalized tables optimized for both specific set queries and business queries
-   * An ETL pipeline was build in PostgreSQL and Apache Cassandra.
+   * An ETL pipeline was build for PostgreSQL and Apache Cassandra Databases.
    
    ***Proficiencies learned and used: Python, PostgreSQL, Star Schema, ETL pipelines, Normalization, Apache Cassandra, Denormalization***
    
