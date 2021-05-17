@@ -12,8 +12,8 @@
    * Created a relational database using PostgreSQL to find the diverse needs of data consumers.
    * Developed a Star Schema database using optimized definitions of Fact and Dimension tables. Normalization of tables.
    * Created a NoSQL database using Apache Cassandra based on the schema outlined above. 
-   * Developed denormalized tables optimized for both specific set queries and business queries
-   * An ETL pipeline was build databases in PostgreSQL and Apache Cassandra.
+      * Developed denormalized tables optimized for both specific set queries and business queries
+   * An ETL pipeline was build in PostgreSQL and Apache Cassandra.
    * ***Proficiencies learned and used: Python, PostgreSQL, Star Schema, ETL pipelines, Normalization, Apache Cassandra, Denormalization***
 2. #### [Data Warehouses](https://github.com/srujanreddyj/data-engineering-concepts/tree/master/datawarehouse)
    * Applied Data Warehouse architectures learned and built a data warehouse on AWS cloud. 
